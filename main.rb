@@ -17,7 +17,8 @@ class Main
 
     # Generate predictions for available domains
     @all_domains.each{ |key, domain| domain.generate_predictions }
-    
+
+    # Utility method to display Email statistics per domain name
     # display_info
   end
 
@@ -26,10 +27,12 @@ class Main
     @test_dataset.each do |test_item|
       domain_name = test_item[1]
       if !@all_domains.keys.include?(domain_name)
+        puts "Predictions for " + test_item[0] + " are - "
         puts "Can not predict email for this domain as no sufficient information is available"
+        puts "-" * 50
       else
         current_domain = get_current_domain(domain_name) 
-        current_domain.predict(test_item[0])
+        current_domain.display_predictions(test_item[0])
       end
     end
   end
